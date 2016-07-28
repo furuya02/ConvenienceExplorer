@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CSEMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jij-Np-ahT" customClass="WTArchitectView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Liq-W6-yBU">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="njK-Sh-eN1"/>
+                                </constraints>
+                                <state key="normal" title="Convenience Stores">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IxA-ix-8tt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Liq-W6-yBU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="64n-Vw-rW4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jij-Np-ahT" secondAttribute="bottom" constant="50" id="AxN-vt-oIj"/>
+                            <constraint firstAttribute="trailing" secondItem="jij-Np-ahT" secondAttribute="trailing" id="BSN-hC-qUC"/>
+                            <constraint firstItem="jij-Np-ahT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ckg-lX-9sv"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Liq-W6-yBU" secondAttribute="bottom" id="Cut-aS-LpW"/>
+                            <constraint firstItem="jij-Np-ahT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SnX-DX-6DT"/>
+                            <constraint firstAttribute="trailing" secondItem="Liq-W6-yBU" secondAttribute="trailing" id="qcY-dU-C3i"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="architectView" destination="jij-Np-ahT" id="8h4-Rh-SWL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="486.5" y="476.5"/>
+        </scene>
+    </scenes>
+</document>
