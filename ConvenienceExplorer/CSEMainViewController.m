@@ -90,7 +90,7 @@
 
     // JavaScriptへのデータ送信
     NSString *jsonData = self.convenienceStoreRepository.jsonData;
-    NSString *javascript = [NSString stringWithFormat:@"newData('%@')",jsonData];
+    NSString *javascript = [NSString stringWithFormat:@"createData('%@')",jsonData];
     [SVProgressHUD dismiss];
     [self.architectView callJavaScript:javascript];
 }
