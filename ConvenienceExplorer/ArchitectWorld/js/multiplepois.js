@@ -1,6 +1,6 @@
-var convenienceStores;
-var keep_lat;
-var keep_lon;
+//var convenienceStores;
+//var keep_lat;
+//var keep_lon;
 // implementation of AR-Experience (aka "World")
 var World = {
 	// true once data was fetched
@@ -77,8 +77,8 @@ var World = {
 		/*
 			The custom function World.onLocationChanged checks with the flag World.initiallyLoadedData if the function was already called. With the first call of World.onLocationChanged an object that contains geo information will be created which will be later used to create a marker using the World.loadPoisFromJsonData function.
 		*/
-        keep_lat = lat;
-        keep_lon = lon;
+//        keep_lat = lat;
+//        keep_lon = lon;
 
 
 		if (!World.initiallyLoadedData) {
@@ -112,30 +112,24 @@ var World = {
 			World.currentMarker.setDeselected(World.currentMarker);
 		}
 	},
-
-	// request POI data
-	requestDataFromLocal: function requestDataFromLocalFn(centerPointLatitude, centerPointLongitude) {
-        var poisToCreate = convenienceStores.length;
-		var poiData = [];
-        for (var i = 0; i < poisToCreate; i++) {
-            poiData.push({
-                         "id": (i + 1),
-                         "longitude": (convenienceStores[i].longitude),
-                         "latitude": (convenienceStores[i].latitude),
-                         "distance": (convenienceStores[i].distance),
-                         "grouping": (convenienceStores[i].grouping),
-                         "altitude": (convenienceStores[i].altitude + Math.floor(Math.random() * 5) * 20),
-                         "name": (convenienceStores[i].name)
-                         });
-        }
-		World.loadPoisFromJsonData(poiData);
-	}
 };
 
 function newData(json){
     var data = JSON.parse(json);
-    convenienceStores = data.convenienceStore;
-    World.requestDataFromLocal(keep_lat, keep_lon);
+    var poisToCreate = data.convenienceStores.length;
+    var poiData = [];
+    for (var i = 0; i < poisToCreate; i++) {
+        poiData.push({
+                     "id": (i + 1),
+                     "longitude": (data.convenienceStores[i].longitude),
+                     "latitude": (data.convenienceStores[i].latitude),
+                     "distance": (data.convenienceStores[i].distance),
+                     "grouping": (data.convenienceStores[i].grouping),
+                     "altitude": (data.convenienceStores[i].altitude + Math.floor(Math.random() * 5) * 20),
+                     "name": (data.convenienceStores[i].name)
+                     });
+    }
+    World.loadPoisFromJsonData(poiData);
 }
 
 function clearData(){

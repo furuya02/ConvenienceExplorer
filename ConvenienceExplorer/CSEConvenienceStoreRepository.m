@@ -41,7 +41,7 @@
 - (NSString *) jsonData
 {
     NSMutableString *str = [NSMutableString string];
-    [str appendString: @"{\"convenienceStore\":["];
+    [str appendString: @"{\"convenienceStores\":["];
     bool farst = true;
     for (CSEConvenienceStore *convenienceStore in _convenienceStores)
     {
