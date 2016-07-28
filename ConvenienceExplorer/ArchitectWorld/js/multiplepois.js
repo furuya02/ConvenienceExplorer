@@ -5,36 +5,36 @@ var World = {
     imageFamilymart: null,
     imageSeicomart: null,
 
-	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
-		World.markerDrawable_idle = new AR.ImageResource("assets/marker.png");
-        World.imageSeveneleven = new AR.ImageResource("assets/seveneleven.jpg");
-        World.imageLowson = new AR.ImageResource("assets/lowson.png");
-        World.imageFamilymart = new AR.ImageResource("assets/familymart.jpg");
-        World.imageSeicomart = new AR.ImageResource("assets/seicomart.jpeg");
-        World.imageSanks = new AR.ImageResource("assets/sanks.jpeg");
 
-		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+    loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
+
+		for (var i = 0; i < poiData.length; i++) {
 			var singlePoi = {
-				"id": poiData[currentPlaceNr].id,
-				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
-				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
-				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
-                "grouping": poiData[currentPlaceNr].grouping,
-				"name": poiData[currentPlaceNr].name,
-				"distance": poiData[currentPlaceNr].distance
+				"latitude": parseFloat(poiData[i].latitude),
+				"longitude": parseFloat(poiData[i].longitude),
+				"altitude": parseFloat(poiData[i].altitude),
+                "grouping": poiData[i].grouping,
+				"name": poiData[i].name,
+				"distance": poiData[i].distance
 			};
             new Marker(singlePoi);
 		}
-	},
+	}
 };
 
 function newData(json){
     var data = JSON.parse(json);
-    var poisToCreate = data.convenienceStores.length;
+
+    World.markerDrawable_idle = new AR.ImageResource("assets/marker.png");
+    World.imageSeveneleven = new AR.ImageResource("assets/seveneleven.jpg");
+    World.imageLowson = new AR.ImageResource("assets/lowson.png");
+    World.imageFamilymart = new AR.ImageResource("assets/familymart.jpg");
+    World.imageSeicomart = new AR.ImageResource("assets/seicomart.jpeg");
+    World.imageSanks = new AR.ImageResource("assets/sanks.jpeg");
+
     var poiData = [];
-    for (var i = 0; i < poisToCreate; i++) {
+    for (var i = 0; i < data.convenienceStores.length; i++) {
         poiData.push({
-                     "id": (i + 1),
                      "longitude": (data.convenienceStores[i].longitude),
                      "latitude": (data.convenienceStores[i].latitude),
                      "distance": (data.convenienceStores[i].distance),
@@ -44,6 +44,7 @@ function newData(json){
                      });
     }
     World.loadPoisFromJsonData(poiData);
+
 }
 
 function clearData(){
