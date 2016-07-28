@@ -12,11 +12,11 @@ function Marker(poiData) {
     // create an AR.ImageDrawable for the marker in idle state
     this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 2.5, {
         zOrder: 0,
-        opacity: 1.0,
+        opacity: 1.0//,
         /*
             To react on user interaction, an onClick property can be set for each AR.Drawable. The property is a function which will be called each time the user taps on the drawable. The function called on each tap is returned from the following helper function defined in marker.js. The function returns a function which checks the selected state with the help of the variable isSelected and executes the appropriate function. The clicked marker is passed as an argument.
         */
-        onClick: Marker.prototype.getOnClickTrigger(this)
+        //onClick: Marker.prototype.getOnClickTrigger(this)
     });
 
     this.imageSeveneleven = new AR.ImageDrawable(World.imageSeveneleven, 2.0, {
@@ -53,7 +53,7 @@ function Marker(poiData) {
 
 
     // create an AR.Label for the marker's title 
-    this.titleLabel = new AR.Label(poiData.title.trunc(10), 0.4, {
+    this.nameLabel = new AR.Label(poiData.name.trunc(10), 0.4, {
         zOrder: 1,
         offsetY: -0.8,
         style: {
@@ -62,7 +62,7 @@ function Marker(poiData) {
     });
 
     // create an AR.Label for the marker's description
-    this.descriptionLabel = new AR.Label(poiData.distance.trunc(15), 1.0, {
+    this.distanceLabel = new AR.Label(poiData.distance.trunc(15), 1.0, {
         zOrder: 1,
         offsetY: 0.4,
         offsetX: 0.5,
@@ -75,7 +75,7 @@ function Marker(poiData) {
     // create the AR.GeoObject with the drawable objects
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.titleLabel, this.descriptionLabel, this.imageSeveneleven, this.imageLowson, this.imageFamirymart,this.imageSeicomart, this.imageSanks]
+            cam: [this.markerDrawable_idle, this.nameLabel, this.distanceLabel, this.imageSeveneleven, this.imageLowson, this.imageFamirymart,this.imageSeicomart, this.imageSanks]
         }
     });
 
@@ -110,26 +110,26 @@ Marker.prototype.getOnClickTrigger = function(marker) {
     };
 };
 
-Marker.prototype.setSelected = function(marker) {
-
-    marker.isSelected = true;
-
-    marker.markerDrawable_idle.opacity = 0.0;
-    marker.markerDrawable_selected.opacity = 1.0;
-    marker.markerDrawable_idle.onClick = null;
-    marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickTrigger(marker);
-};
-
-Marker.prototype.setDeselected = function(marker) {
-
-    marker.isSelected = false;
-
-    marker.markerDrawable_idle.opacity = 1.0;
-    marker.markerDrawable_selected.opacity = 0.0;
-
-    marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
-    marker.markerDrawable_selected.onClick = null;
-};
+//Marker.prototype.setSelected = function(marker) {
+//
+//    marker.isSelected = true;
+//
+//    marker.markerDrawable_idle.opacity = 0.0;
+//    marker.markerDrawable_selected.opacity = 1.0;
+//    marker.markerDrawable_idle.onClick = null;
+//    marker.markerDrawable_selected.onClick = Marker.prototype.getOnClickTrigger(marker);
+//};
+//
+//Marker.prototype.setDeselected = function(marker) {
+//
+//    marker.isSelected = false;
+//
+//    marker.markerDrawable_idle.opacity = 1.0;
+//    marker.markerDrawable_selected.opacity = 0.0;
+//
+//    marker.markerDrawable_idle.onClick = Marker.prototype.getOnClickTrigger(marker);
+//    marker.markerDrawable_selected.onClick = null;
+//};
 
 // will truncate all strings longer than given max-length "n". e.g. "foobar".trunc(3) -> "foo..."
 String.prototype.trunc = function(n) {

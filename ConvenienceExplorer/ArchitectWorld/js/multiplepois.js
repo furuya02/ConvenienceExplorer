@@ -27,7 +27,7 @@ var World = {
 		World.markerList = [];
 
 		// start loading marker assets
-		World.markerDrawable_idle = new AR.ImageResource("assets/test.png");
+		World.markerDrawable_idle = new AR.ImageResource("assets/marker.png");
         World.imageSeveneleven = new AR.ImageResource("assets/seveneleven.jpg");
         World.imageLowson = new AR.ImageResource("assets/lowson.png");
         World.imageFamilymart = new AR.ImageResource("assets/familymart.jpg");
@@ -42,7 +42,7 @@ var World = {
 				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
 				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
                 "grouping": poiData[currentPlaceNr].grouping,
-				"title": poiData[currentPlaceNr].name,
+				"name": poiData[currentPlaceNr].name,
 				"distance": poiData[currentPlaceNr].distance
 			};
 
@@ -124,7 +124,6 @@ var World = {
                          "latitude": (convenienceStores[i].latitude),
                          "distance": (convenienceStores[i].distance),
                          "grouping": (convenienceStores[i].grouping),
-//                         "altitude": (convenienceStores[i].altitude) + Math.floor( Math.random()*10)*10,
                          "altitude": (convenienceStores[i].altitude + Math.floor(Math.random() * 5) * 20),
                          "name": (convenienceStores[i].name)
                          });
