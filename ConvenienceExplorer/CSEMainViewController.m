@@ -58,7 +58,24 @@
     [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
 }
 
-- (IBAction)tapButton:(id)sender {
+#pragma mark - View Lifecycle
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self startWikitudeSDKRendering];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self stopWikitudeSDKRendering];
+}
+
+#pragma mark - Action
+
+- (IBAction)tapButton:(id)sender
+{
     NSString *javascript = [NSString stringWithFormat:@"clearData()"];
     [self.architectView callJavaScript:javascript];
     [SVProgressHUD show];
@@ -83,6 +100,45 @@
     [self.convenienceStoreRepository refreshWithLocation:location.coordinate.latitude :location.coordinate.longitude :location.altitude];
 }
 
+#pragma mark - View Rotation
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.architectView setShouldRotate:YES toInterfaceOrientation:toInterfaceOrientation];
+}
+
+#pragma mark - Notifications
+
+- (void)didReceiveApplicationWillResignActiveNotification:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self stopWikitudeSDKRendering];
+    });
+}
+
+- (void)didReceiveApplicationDidBecomeActiveNotification:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        if ( self.architectWorldNavigation.wasInterrupted )
+        {
+            [self.architectView reloadArchitectWorld];
+        }
+
+        [self startWikitudeSDKRendering];
+    });
+}
+
 -(void)didSearchFinishNotification
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -95,23 +151,10 @@
     [self.architectView callJavaScript:javascript];
 }
 
-#pragma mark - View Lifecycle
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self startWikitudeSDKRendering];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [self stopWikitudeSDKRendering];
-}
-
 #pragma mark - Private Methods
 
-- (void)startWikitudeSDKRendering {
+- (void)startWikitudeSDKRendering
+{
     if ( ![self.architectView isRunning] ) {
         [self.architectView start:^(WTStartupConfiguration *configuration) {
         } completion:^(BOOL isRunning, NSError *error) {
@@ -122,47 +165,15 @@
     }
 }
 
-- (void)stopWikitudeSDKRendering {
+- (void)stopWikitudeSDKRendering
+{
     if ( [self.architectView isRunning] ) {
         [self.architectView stop];
     }
 }
 
-#pragma mark - View Rotation
-
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [self.architectView setShouldRotate:YES toInterfaceOrientation:toInterfaceOrientation];
-}
-
-#pragma mark - Notifications
-
-- (void)didReceiveApplicationWillResignActiveNotification:(NSNotification *)notification {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self stopWikitudeSDKRendering];
-    });
-}
-
-- (void)didReceiveApplicationDidBecomeActiveNotification:(NSNotification *)notification {
-    dispatch_async(dispatch_get_main_queue(), ^{
-
-        if ( self.architectWorldNavigation.wasInterrupted )
-        {
-            [self.architectView reloadArchitectWorld];
-        }
-
-        [self startWikitudeSDKRendering];
-    });
-}
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
