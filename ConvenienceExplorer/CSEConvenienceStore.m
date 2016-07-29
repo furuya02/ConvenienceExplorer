@@ -23,37 +23,37 @@
 
         NSRange range = [_name rangeOfString:@"セイコーマート"];
         if (range.location != NSNotFound) {
-            _name = [_name substringFromIndex:range.length];
+            //_name = [_name substringFromIndex:range.length];
             _grouping = GroupingSeicomart;
         }
         else {
             range = [_name rangeOfString:@"ローソン"];
             if (range.location != NSNotFound) {
-                _name = [_name substringFromIndex:range.length];
+                //_name = [_name substringFromIndex:range.length];
                 _grouping = GroupingLowson;
             }
             else{
                 range = [_name rangeOfString:@"セブンイレブン"];
                 if (range.location != NSNotFound) {
-                    _name = [_name substringFromIndex:range.length];
+                    //_name = [_name substringFromIndex:range.length];
                     _grouping = GroupingSeveneleven;
                 }
                 else {
                     range = [_name rangeOfString:@"セブン−イレブン"];
                     if (range.location != NSNotFound) {
-                        _name = [_name substringFromIndex:range.length];
+                        //_name = [_name substringFromIndex:range.length];
                         _grouping = GroupingSeveneleven;
                     }
                     else{
                         range = [_name rangeOfString:@"ファミリーマート"];
                         if (range.location != NSNotFound) {
-                            _name = [_name substringFromIndex:range.length];
+                            //_name = [_name substringFromIndex:range.length];
                             _grouping = GroupingFamilymart;
                         }
                         else{
                             range = [_name rangeOfString:@"サンクス"];
                             if (range.location != NSNotFound) {
-                                _name = [_name substringFromIndex:range.length];
+                                //_name = [_name substringFromIndex:range.length];
                                 _grouping = GroupingSanks;
                             }
                         }

@@ -9,37 +9,37 @@ function Marker(poiData) {
 
     this.imageSeveneleven = new AR.ImageDrawable(World.imageSeveneleven, 2.0, {
                                                         zOrder: 1,
-                                                        opacity: poiData.grouping==4?1:0,
+                                                        opacity: 0,//poiData.grouping==4?1:0,
                                                         offsetY: 0.35,
                                                         offsetX: -2.0
                                                         });
     this.imageLowson = new AR.ImageDrawable(World.imageLowson, 2.0, {
                                                  zOrder: 1,
-                                                opacity: poiData.grouping==2?1:0,
+                                                opacity: 0,//poiData.grouping==2?1:0,
                                                  offsetY: 0.35,
                                                  offsetX: -2.0
                                                  });
     this.imageFamirymart = new AR.ImageDrawable(World.imageFamilymart, 2.0, {
                                                  zOrder: 1,
-                                                opacity: poiData.grouping==1?1:0,
+                                                opacity: 0,//poiData.grouping==1?1:0,
                                                  offsetY: 0.35,
                                                  offsetX: -2.0
                                                  });
     this.imageSeicomart = new AR.ImageDrawable(World.imageSeicomart, 2.0, {
                                                  zOrder: 1,
-                                               opacity: poiData.grouping==3?1:0,
+                                               opacity: 0,//poiData.grouping==3?1:0,
                                                  offsetY: 0.35,
                                                  offsetX: -2.0
                                                  });
     this.imageSanks = new AR.ImageDrawable(World.imageSanks, 2.0, {
                                                zOrder: 1,
-                                               opacity: poiData.grouping==5?1:0,
+                                               opacity: 0,//poiData.grouping==5?1:0,
                                                offsetY: 0.35,
                                                offsetX: -2.0
                                                });
-    this.nameLabel = new AR.Label(poiData.name.trunc(10), 0.4, {
+    this.nameLabel = new AR.Label(poiData.name.trunc(10), 0.5, {
         zOrder: 1,
-        offsetY: -0.8,
+        offsetY: -0.5,
         style: {
             textColor: '#FFFFFF'
         }
